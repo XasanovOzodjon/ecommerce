@@ -12,7 +12,7 @@ class OrderPaymentStatusView(View):
     def patch(self, request: HttpRequest, pk: int) -> JsonResponse:
         
         orders_pay_status = []
-        temp = Order.OrderPaymentStatus
+        temp = Order.PaymentStatus
         for i in temp:
             orders_pay_status.append(str(i[0]))
             
@@ -25,4 +25,4 @@ class OrderPaymentStatusView(View):
         else:
             order.payment_status = new_pay_status
             order.save()
-            return JsonResponse({'message': 'surficuly'}, status=200)
+            return JsonResponse({'message': 'successfully'}, status=200)

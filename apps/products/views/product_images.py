@@ -48,8 +48,8 @@ class ProductImageDetailView(View):
         return JsonResponse(image.to_dict(), status=204)
 
     def delete(self, request: HttpRequest, pk: int) -> JsonResponse:
-        impage = get_object_or_404(ProductImage, pk=pk)
+        image = get_object_or_404(ProductImage, pk=pk)
 
-        impage.delete()
+        image.delete()
 
         return JsonResponse({'image': 'Deleted.'}, status=204)

@@ -33,7 +33,7 @@ class Order(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.user.username
+        return f"Order {self.pk} - {self.user.username if self.user else 'No User'}"
     
 
     def to_dict(self) -> dict:
@@ -46,7 +46,7 @@ class Order(models.Model):
             'created_at': self.created_at.isoformat(),
             'updated_at': self.updated_at.isoformat(),
             'items': [i.to_dict() for i in self.items.all()],
-            'user': self.user.to_dict()
+            'user': self.user.to_dict() if self.user else None
         }
 
 
@@ -69,5 +69,6 @@ class OrderItem(models.Model):
         return {
             'id': self.pk,
             'quantity': self.quantity,
-            'total': self.total
+            'total': self.total,
+            'product': self.product.to_dict() if self.product else None
         }
